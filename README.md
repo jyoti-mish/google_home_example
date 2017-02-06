@@ -1,39 +1,43 @@
-# node-js-getting-started
+# Actions on Google Webhook Template using Node.js
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+This webhook template sets up everything you need to build your fulfillment
+business logic for your API.AI agent.
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+## Setup Instructions
 
-## Running Locally
+### Pre-requisites
+ 1. API.AI account: [https://api.ai](https://api.ai)
+ 2. Google Cloud project: [https://console.cloud.google.com/project](https://console.cloud.google.com/project)
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+See the developer guide and release notes at [https://developers.google.com/actions/](https://developers.google.com/actions/) for more details.
 
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
+### Steps
+1. Create a new agent in API.AI [https://api.ai](https://api.ai).
+1. Deploy this app to your preferred hosting environment (we recommend Google App Engine)
+1. Set the "Fulfillment" webhook URL to the hosting URL.
+1. In any relevant intents, enable the Fulfillment for the response.
+1. Build out your agent and business logic.
+1. Make sure all domains are turned off.
+1. Enable Actions on Google in the Integrations.
+1. Provide an invocation name for the action.
+1. Authorize and preview the action in the [web simulator](https://developers.google.com/actions/tools/web-simulator).
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+For more detailed information on deployment, see the [documentation](https://developers.google.com/actions/samples/).
 
-## Deploying to Heroku
+## References and How to report bugs
+* Actions on Google documentation: [https://developers.google.com/actions/](https://developers.google.com/actions/).
+* If you find any issues, please open a bug here on GitHub.
+* Questions are answered on [StackOverflow](https://stackoverflow.com/questions/tagged/actions-on-google).
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
+## How to make contributions?
+Please read and follow the steps in the CONTRIBUTING.md.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+## License
+See LICENSE.md.
 
-## Documentation
+## Terms
+Your use of this sample is subject to, and by using or downloading the sample files you agree to comply with, the [Google APIs Terms of Service](https://developers.google.com/terms/).
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+## Google+
+Actions on Google Developers Community on Google+ [https://g.co/actionsdev](https://g.co/actionsdev).
 
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
