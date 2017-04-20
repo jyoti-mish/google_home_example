@@ -30,7 +30,7 @@ app.post('/', function (req, res) {
   // Fulfill action business logic
   function responseHandler (assistant) {
     // Complete your fulfillment logic and send a response
-    assistant.tell('Hello, World!');
+    assistant.tell('Hello, World1!');
     getJsonEventsFromWikipedia(setpoint, temp, function (events) {
         var speechText = "";
         sessionAttributes.text = events;
