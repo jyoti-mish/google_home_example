@@ -31,8 +31,54 @@ app.post('/', function (req, res) {
   function responseHandler (assistant) {
     // Complete your fulfillment logic and send a response
     assistant.tell('Hello, World!');
+    getJsonEventsFromWikipedia(setpoint, temp, function (events) {
+        var speechText = "";
+        sessionAttributes.text = events;
+        session.attributes = sessionAttributes;
+        if (events.length == 0) {
+         //   speechText = "There is a problem connecting to Aprilaire at this time. Please try again later.";
+         //   response.tell(speechText);
+        } else {
+            
+                speechText = speechText+ " "+ events + " ";
+         
+          //  speechText = speechText + " Wanna go deeper in history?";
+            response.askWithCard(prefixContent + speechText, repromptText, cardTitle, speechText);
+        }
+    });
   }
+function getJsonEventsFromWikipedia(setpoint, temp, eventCallback) {
+	
+ var jsonobj=JSON.stringify({"LocationId":5919,"Parameters":[{"ParameterName":"Hold Type","ParameterValue":"1"},{"ParameterName":"Hold Fan","ParameterValue":"2"},{"ParameterName":"Hold Heat Setpoint","ParameterValue":temp.value},{"ParameterName":"Hold Cool Setpoint","ParameterValue":"87"},{"ParameterName":"Hold End Minute","ParameterValue":"0"},{"ParameterName":"Hold End Hour","ParameterValue":"6"},{"ParameterName":"Hold End Date","ParameterValue":"29"},{"ParameterName":"Hold End Month","ParameterValue":"8"},{"ParameterName":"Hold End Year","ParameterValue":"16"},{"ParameterName":"Hold Dehumidification Setpoint","ParameterValue":"0"}],"ThermostatId":75503,"UserId":4,"AttributeName":"Hold"});
+//var jsonobj=JSON.stringify({"LocationId":5919,"Parameters":[{"ParameterName":"Hold Type","ParameterValue":"1"},{"ParameterName":"Hold Fan","ParameterValue":"2"},{"ParameterName":"Hold Heat Setpoint","ParameterValue":"84"},{"ParameterName":"Hold Cool Setpoint","ParameterValue":"87"},{"ParameterName":"Hold End Minute","ParameterValue":"0"},{"ParameterName":"Hold End Hour","ParameterValue":"6"},{"ParameterName":"Hold End Date","ParameterValue":"29"},{"ParameterName":"Hold End Month","ParameterValue":"8"},{"ParameterName":"Hold End Year","ParameterValue":"16"},{"ParameterName":"Hold Dehumidification Setpoint","ParameterValue":"0"}],"ThermostatId":75503,"UserId":4,"AttributeName":"Hold"});
+var post_options = {
+      host: 'web.lntdemoprojects.com',
+      port: '443',
+      path: '/raswcfservice/RASWCFService.svc/SetThermostatParameters/0',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': jsonobj.length
+      }
+  };
+var callback=function(res) {
+        var body = '';
+res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            body += chunk;
+        });
 
+        res.on('end', function () {
+			if(body=="{\"Message\":\"Settings saved successfully!\",\"Result\":true}")
+				{
+            var stringResult = "temperature is changed.";
+            eventCallback(stringResult);
+				}
+        });
+    }
+	
+    https.request(post_options, callback).write(jsonobj);
+}
   assistant.handleRequest(responseHandler);
 });
 // [END YourAction]
