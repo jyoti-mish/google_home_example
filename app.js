@@ -49,9 +49,9 @@ app.post('/', function (req, res) {
     });
   }
 function getJsonEvents(eventCallback) {
-	   assistant.tell('Hello, World1!');
-   var url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
-var https = require('https');
+	   assistant.tell('Hello, World!!');
+   let url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
+let https = require('https');
     https.get(url, function(res) {
         var body = '';
 
@@ -60,7 +60,7 @@ var https = require('https');
         });
 
         res.on('end', function () {
-            var stringResult = body;
+            let stringResult = body;
             eventCallback(stringResult);
         });
     }).on('error', function (e) {
