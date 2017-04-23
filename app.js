@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @jyoti-mish
+ Sign out
+ Watch 0
+  Star 0
+  Fork 0 jyoti-mish/april
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathapril/app.js
+b86ddc7  on Feb 9
+@jyoti-mish jyoti-mish Add files via upload
+1 contributor
+RawBlameHistory     
+67 lines (57 sloc)  2.12 KB
 // Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the 'License');
 // you may not use this file except in compliance with the License.
@@ -21,37 +39,19 @@ let bodyParser = require('body-parser');
 let app = express();
 app.use(bodyParser.json({type: 'application/json'}));
 
+const Temp_ACTION = 'SettempIntent';
+const status_ACTION = 'SetStatusIntent';
+const SETPOINT_ARGUMENT = 'SetPoint';
+const NUMBER_ARGUMENT = 'Temp';
+
 // [START YourAction]
 app.post('/', function (req, res) {
   const assistant = new Assistant({request: req, response: res});
   console.log('Request headers: ' + JSON.stringify(req.headers));
   console.log('Request body: ' + JSON.stringify(req.body));
+assistant.tell('hi');
 
-  // Fulfill action business logic
-  function responseHandler (assistant) {
-    // Complete your fulfillment logic and send a response
-    
-  	 let stringResult=''; 
-	    let url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
-let https = require('https');
-    https.get(url, function(res) {
-        var body = '';
 
-        res.on('data', function (chunk) {
-            body += chunk;
-        });
-
-        res.on('end', function () {
-             stringResult = body;
-		assistant.tell(stringResult);
-           // eventCallback(stringResult);
-        });
-    }).on('error', function (e) {
-        assistant.tell("Got error: ", e);
-    });
-   
-    });
-  
   assistant.handleRequest(responseHandler);
 });
 // [END YourAction]
@@ -67,3 +67,5 @@ if (module === require.main) {
 }
 
 module.exports = app;
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
