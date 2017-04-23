@@ -31,26 +31,8 @@ app.post('/', function (req, res) {
   function responseHandler (assistant) {
     // Complete your fulfillment logic and send a response
     
-   getJsonEvents( function (events) {
-	   assistant.tell('Hello, World1!');
-     var prefixContent =""
-	 
-	   var speechText = "";
-        if (events.length == 0) {
-            speechText = "There is a problem connecting to thermostat at this time. Please try again later.";
-             assistant.tell(speechText);
-        } else {
-            for (i = 0; i < 1; i++) {
-                speechText = speechText + events[i] + " ";
-            }
-           // speechText = speechText + " Wanna go deeper in history?";
-             assistant.tell(prefixContent + speechText);
-        }
-    });
-  }
-function getJsonEvents(eventCallback) {
-	   assistant.tell('Hello, World!!');
-   let url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
+  	 let stringResult=''; 
+	    let url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
 let https = require('https');
     https.get(url, function(res) {
         var body = '';
@@ -60,13 +42,16 @@ let https = require('https');
         });
 
         res.on('end', function () {
-            let stringResult = body;
-            eventCallback(stringResult);
+             stringResult = body;
+		assistant.tell(stringResult);
+           // eventCallback(stringResult);
         });
     }).on('error', function (e) {
-        console.log("Got error: ", e);
+        assistant.tell("Got error: ", e);
     });
-}
+   
+    });
+  
   assistant.handleRequest(responseHandler);
 });
 // [END YourAction]
