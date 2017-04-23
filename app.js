@@ -49,6 +49,7 @@ app.post('/', function (req, res) {
     });
   }
 function getJsonEvents(eventCallback) {
+	   assistant.tell('Hello, World1!');
    var url = 'https://web.lntdemoprojects.com/RASWCFService/RASWCFService.svc/GetThermostatHome/6402/5967/76632';
 var https = require('https');
     https.get(url, function(res) {
