@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @jyoti-mish
- Sign out
- Watch 0
-  Star 0
-  Fork 0 jyoti-mish/april
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathapril/app.js
-b86ddc7  on Feb 9
-@jyoti-mish jyoti-mish Add files via upload
-1 contributor
-RawBlameHistory     
-67 lines (57 sloc)  2.12 KB
 // Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the 'License');
 // you may not use this file except in compliance with the License.
@@ -49,7 +31,22 @@ app.post('/', function (req, res) {
   const assistant = new Assistant({request: req, response: res});
   console.log('Request headers: ' + JSON.stringify(req.headers));
   console.log('Request body: ' + JSON.stringify(req.body));
-assistant.tell('hi');
+  let color = assistant.getArgument(SETPOINT_ARGUMENT);
+  function makeName (assistant) {
+    let number = assistant.getArgument(NUMBER_ARGUMENT);
+  //  let color = assistant.getArgument(SETPOINT_ARGUMENT);
+    assistant.tell('Alright, your silly name is ' +
+      color + ' ' + number +
+      '! I hope you like it. See you next time.');
+  }
+if(color.toLowerCase()=='heatsetpoint'||color.toLowerCase()=='coolsetpoint')
+{  let actionMap = new Map();
+  actionMap.set(Temp_ACTION, makeName);
+}
+else{
+	let actionMap = new Map();
+  actionMap.set(status_ACTION, makeName);
+}
 
 
   assistant.handleRequest(responseHandler);
@@ -67,5 +64,3 @@ if (module === require.main) {
 }
 
 module.exports = app;
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
