@@ -28,8 +28,7 @@ const NUMBER_ARGUMENT = 'Temp';
 
 // [START YourAction]
 app.post('/', function (req, res) {
-  const assistant = new Assistant({request: req, response: res});
-  console.log('Request headers: ' + JSON.stringify(req.headers));
+  
   assistant.tell('Alright, your silly name is ');
   // [END server]
 }
