@@ -30,7 +30,7 @@ app.post('/', function (req, res) {
   // Fulfill action business logic
   function responseHandler (assistant) {
     // Complete your fulfillment logic and send a response
-    assistant.tell('Hello, World!');
+    assistant.tell('you are connected with your test app');
   }
 
   assistant.handleRequest(responseHandler);
