@@ -30,36 +30,7 @@ const NUMBER_ARGUMENT = 'Temp';
 app.post('/', function (req, res) {
   const assistant = new Assistant({request: req, response: res});
   console.log('Request headers: ' + JSON.stringify(req.headers));
-  console.log('Request body: ' + JSON.stringify(req.body));
-  let color = assistant.getArgument(SETPOINT_ARGUMENT);
-  function makeName (assistant) {
-    let number = assistant.getArgument(NUMBER_ARGUMENT);
-  //  let color = assistant.getArgument(SETPOINT_ARGUMENT);
-    assistant.tell('Alright, your silly name is ' +
-      color + ' ' + number +
-      '! I hope you like it. See you next time.');
-  }
-if(color.toLowerCase()=='heatsetpoint'||color.toLowerCase()=='coolsetpoint')
-{  let actionMap = new Map();
-  actionMap.set(Temp_ACTION, makeName);
-}
-else{
-	let actionMap = new Map();
-  actionMap.set(status_ACTION, makeName);
-}
-
-
-  assistant.handleRequest(responseHandler);
-});
-// [END YourAction]
-
-if (module === require.main) {
-  // [START server]
-  // Start the server
-  let server = app.listen(process.env.PORT || 8080, function () {
-    let port = server.address().port;
-    console.log('App listening on port %s', port);
-  });
+  assistant.tell('Alright, your silly name is ');
   // [END server]
 }
 
